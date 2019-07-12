@@ -9,9 +9,9 @@ var router = express.Router();
 var burger = require("../models/burger.js");
 
 router.get("/", function(req, res) {
-  cat.all(function(data) {
+  burger.all(function(data) {
     var hbsObject = {
-      cats: data
+      burgers: data
     };
     console.log(hbsObject);
     res.render("index", hbsObject);
@@ -22,7 +22,7 @@ router.post("/api/burger", function(req, res) {
   burger.create([
     "Burger a la Mode", "Summer Thyme Burger"
   ], [
-    req.body.name, req.body.summer
+    req.body.name, req.body.keep
   ], function(result) {
     
     res.json({ id: result.insertId });
@@ -35,10 +35,10 @@ router.put("/api/burgers/:id", function(req, res) {
   console.log("condition", condition);
 
   burger.update({
-    summer: req.body.summer
+    keep: req.body.keep
   }, condition, function(result) {
     if (result.changedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
+     
       return res.status(404).end();
     } else {
       res.status(200).end();
@@ -51,7 +51,7 @@ router.delete("/api/burgers/:id", function(req, res) {
 
   burger.delete(condition, function(result) {
     if (result.affectedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
+    
       return res.status(404).end();
     } else {
       res.status(200).end();
