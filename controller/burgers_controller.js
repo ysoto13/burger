@@ -22,7 +22,7 @@ router.post("/api/burger", function(req, res) {
   burger.create([
     "Burger a la Mode", "Summer Thyme Burger"
   ], [
-    req.body.name, req.body.keep
+    req.body.name, req.body.devour
   ], function(result) {
     
     res.json({ id: result.insertId });
@@ -35,7 +35,7 @@ router.put("/api/burgers/:id", function(req, res) {
   console.log("condition", condition);
 
   burger.update({
-    keep: req.body.keep
+    devour: req.body.devour
   }, condition, function(result) {
     if (result.changedRows == 0) {
      
